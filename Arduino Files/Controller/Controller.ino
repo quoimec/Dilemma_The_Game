@@ -2,16 +2,14 @@
 
 const int joystickInputX = A0; // analog input for x-axis
 const int joystickInputY = A1; // analog input for y-axis
-const int joystickInputSw = A2; // analog input for y-axis
-const int bluffGreenOutput = 13; // digital input for Green Bluff LED
-const int bluffRedOutput = 12; // digital input for Red Bluff LED
+const int joystickInputSw = A2; // analog input for joystick click
 const int playerGreenOutput = 8; // digital input for Green Player LED
 const int playerRedOutput = 9; // digital input for Red Player LED
-const int resetSw = 2;
+const int resetSw = 2; // digital input
 
 int joystickX = 0; // variable to store x value
 int joystickY = 0; // variable to store y value
-int reset = 0;
+int reset = 0; // variable to store 
 int joystickSw = 0; // variable to store joystick switch value
 
 bool joystickLock = false;
@@ -27,8 +25,6 @@ void setup() {
   pinMode(joystickInputY, INPUT); // setup y input
   pinMode(joystickInputSw, INPUT); // setup switch input
   pinMode(resetSw, INPUT);
-  pinMode(bluffGreenOutput, OUTPUT); // setup green bluff LED output
-  pinMode(bluffRedOutput, OUTPUT); // setup red bluff LED output
   pinMode(playerGreenOutput, OUTPUT); // setup green player LED output
   pinMode(playerRedOutput, OUTPUT); // setup red player LED output
 
@@ -37,8 +33,6 @@ void setup() {
 }
 
 void loop() {
-
-
 
   reset = digitalRead(resetSw); // Read the value of the switch and assign to the variable joystickSw.
   joystickX = analogRead(joystickInputX) - 512; // Read the value of the x-axis and assign to the variable joystickX. -512 to centre the value
@@ -52,12 +46,8 @@ void loop() {
         This acts as the reset function for the game. All LEDs turn off to start the next round.
     */
 
-
-
     if (reset == 1) {
 
-      digitalWrite(bluffGreenOutput, LOW);
-      digitalWrite(bluffRedOutput, LOW);
       digitalWrite(playerGreenOutput, LOW);
       digitalWrite(playerRedOutput, LOW);
 
